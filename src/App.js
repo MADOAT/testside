@@ -1,26 +1,40 @@
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
+import logo from './logo.svg';
+import bear from './bear.jpg';
+import lion from './lion.jpg';
+import penguin from './penguin.jpg';
 
-function App() {
+
+
+const App = () => {
+  const [animal, setAnimal] = useState(null);
+
+  // Function to handle button click
+  const showAnimal = (animalName) => {
+    setAnimal(animalName);
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-      <h1>Welcome to My First Website</h1>
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload!.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Click an Animal</h1>
+      <div>
+        <button onClick={() => showAnimal('lion')}>lion</button>
+        <button onClick={() => showAnimal('bear')}>bear</button>
+        <button onClick={() => showAnimal('penguin')}>penguin</button>
+      </div>
+      {animal && (
+        <div>
+          <h2>{animal.charAt(0).toLowerCase() + animal.slice(1)}</h2>
+          <img 
+              src={animal === 'bear' ? bear : animal === 'lion' ? lion : penguin} 
+              alt={animal} 
+              style={{width: '200px', height: 'auto'}} 
+          />
+        </div>
+      )}
     </div>
   );
-}
+};
 
 export default App;
